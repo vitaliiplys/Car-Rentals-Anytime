@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-manager-user
+      author: plys
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: "email", value: "manager@example.com" }
+              - column: { name: "password", value: "$2a$10$23rpqSNEIYZNXw07qk4KJuN4eUV9jNPiW9fckzgj0adI9RPzav2gG" }
+              - column: { name: "first_name", value: "Jon" }
+              - column: { name: "last_name", value: "Manager" }
+              - column: { name: "is_deleted", valueBoolean: false }
+  - changeSet:
+      id: assign-manager-role
+      author: plys
+      changes:
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  valueNumeric: (SELECT id FROM users WHERE email = 'manager@example.com')
+              - column:
+                  name: role_id
+                  valueNumeric: (SELECT id FROM roles WHERE name = 'ROLE_MANAGER')
