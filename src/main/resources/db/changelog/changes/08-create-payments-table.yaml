@@ -20,7 +20,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: session_url
-                  type: varchar(255)
+                  type: varchar(500)
                   constraints:
                     nullable: false
               - column:
@@ -49,3 +49,9 @@ databaseChangeLog:
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: payments
+            baseColumnNames: rental_id
+            constraintName: fk_payments_rentals
+            referencedTableName: rentals
+            referencedColumnNames: id

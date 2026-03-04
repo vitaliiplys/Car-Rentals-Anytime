@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-telegram-chats-table
+      author: plys
+      changes:
+        - createTable:
+            tableName: telegram_chats
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: chat_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    unique: true

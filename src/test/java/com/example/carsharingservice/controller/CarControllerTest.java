@@ -85,7 +85,7 @@ public class CarControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/07-teardown-all.sql")
+                    new ClassPathResource("database/13-teardown-all.sql")
             );
         }
     }
@@ -189,7 +189,7 @@ public class CarControllerTest {
     }
 
     @Sql(
-            scripts = "classpath:database/05-restore-car-after-update.sql",
+            scripts = "classpath:database/14-restore-car-after-update.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD
     )
     @WithMockUser(username = "Admin", roles = {"MANAGER"})

@@ -11,6 +11,7 @@ import com.example.carsharingservice.model.User;
 import com.example.carsharingservice.repository.car.CarRepository;
 import com.example.carsharingservice.repository.rental.RentalRepository;
 import com.example.carsharingservice.repository.user.UserRepository;
+import com.example.carsharingservice.service.notification.NotificationService;
 import com.example.carsharingservice.service.rental.RentalService;
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +31,7 @@ public class RentalServiceImpl implements RentalService {
     private final CarRepository carRepository;
     private final RentalMapper rentalMapper;
     private final UserRepository userRepository;
+    private final NotificationService notificationService;
 
     @Override
     public RentalResponseDto addRental(User principal, RentalRequestDto requestDto) {
@@ -52,6 +54,7 @@ public class RentalServiceImpl implements RentalService {
         Rental newRental = rentalMapper.toModel(requestDto);
         newRental.getUser().getId();
         Rental savedRental = rentalRepository.save(newRental);
+        notificationService.sendRentalCreatedNotification(savedRental);
         return rentalMapper.toDto(savedRental);
     }
 

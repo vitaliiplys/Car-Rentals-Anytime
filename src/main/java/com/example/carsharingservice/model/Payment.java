@@ -4,12 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import java.net.URL;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -26,11 +28,12 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "rental_id", nullable = false)
-    private Long rentalId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rental_id", nullable = false)
+    private Rental rentalId;
 
     @Column(name = "session_url", nullable = false)
-    private URL sessionUrl;
+    private String sessionUrl;
 
     @Column(name = "session_id", nullable = false)
     private String sessionId;
@@ -44,7 +47,8 @@ public class Payment {
 
     public enum Status {
         PENDING,
-        PAID
+        PAID,
+        CANCELED
     }
 
     @Enumerated(EnumType.STRING)

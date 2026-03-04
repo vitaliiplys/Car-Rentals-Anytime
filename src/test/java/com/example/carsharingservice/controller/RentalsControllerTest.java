@@ -27,14 +27,14 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-@Sql(scripts = {"classpath:database/07-teardown-all.sql",
+@Sql(scripts = {"classpath:database/13-teardown-all.sql",
         "classpath:database/01-insert-manager.sql",
         "classpath:database/02-insert-manager-role.sql",
         "classpath:database/04-inserts-two-default-cars.sql",
-        "classpath:database/06-insert-rentals.sql",
+        "classpath:database/10-insert-rentals.sql",
 })
 
-@Sql(scripts = "classpath:database/07-teardown-all.sql",
+@Sql(scripts = "classpath:database/13-teardown-all.sql",
         executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
